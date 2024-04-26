@@ -1,5 +1,6 @@
-package mik.pet.project;
+package mik.pet.project.repository;
 
+import mik.pet.project.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
