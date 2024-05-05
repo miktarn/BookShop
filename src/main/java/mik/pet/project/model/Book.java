@@ -1,4 +1,4 @@
-package mik.pet.project;
+package mik.pet.project.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
