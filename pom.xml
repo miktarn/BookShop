@@ -19,6 +19,7 @@
         <lombok.version>1.18.30</lombok.version>
         <lombok.mapstruct.plugin.version>0.2.0</lombok.mapstruct.plugin.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <liquibase.version>4.27.0</liquibase.version>
     </properties>
 
     <repositories>
@@ -61,6 +62,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -72,6 +78,9 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -111,6 +120,11 @@
                     <linkXRef>false</linkXRef>
                     <sourceDirectories>src</sourceDirectories>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
             </plugin>
         </plugins>
     </build>
