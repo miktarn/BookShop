@@ -1,8 +1,8 @@
 package mik.pet.project.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import mik.pet.project.exception.EntityNotFoundException;
 import mik.pet.project.model.dto.BookDto;
 import mik.pet.project.model.dto.NewBookRequestDto;
 import mik.pet.project.service.BookService;
@@ -19,13 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping("/api/books")
 public class BookController {
-    /**
-     * GET: /api/books (retrieve book catalog — should have been done in the last PR);
-     * GET: /api/books/{id} (retrieve book details — should have been done in the last PR);
-     * POST: /api/books (create a new book — should have been done in the last PR);
-     * PUT: /api/books/{id} (update a specific book);
-     * DELETE /api/books/{id} (delete a specific book)
-     */
+
     private BookService bookService;
 
     @GetMapping
@@ -34,17 +28,18 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public BookDto getBookById(@PathVariable Long id) throws EntityNotFoundException {
+    public BookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @PostMapping
-    public BookDto createBook(@RequestBody NewBookRequestDto newBookRequestDto) {
+    public BookDto createBook(@RequestBody @Valid NewBookRequestDto newBookRequestDto) {
         return bookService.createBook(newBookRequestDto);
     }
 
     @PutMapping("/{id}")
-    public BookDto updateBook(@PathVariable Long id, @RequestBody NewBookRequestDto updateBookDto) {
+    public BookDto updateBook(@PathVariable Long id,
+                              @RequestBody @Valid NewBookRequestDto updateBookDto) {
         return bookService.updateBook(id, updateBookDto);
     }
 
