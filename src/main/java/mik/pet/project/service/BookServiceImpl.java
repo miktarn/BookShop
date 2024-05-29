@@ -9,6 +9,7 @@ import mik.pet.project.model.dto.BookDto;
 import mik.pet.project.model.dto.NewBookRequestDto;
 import mik.pet.project.repository.BookRepository;
 import mik.pet.project.util.mapper.BookMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +19,8 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }

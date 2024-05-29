@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import mik.pet.project.model.dto.BookDto;
 import mik.pet.project.model.dto.NewBookRequestDto;
 import mik.pet.project.service.BookService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    public List<BookDto> getAll() {
-        return bookService.findAll();
+    public List<BookDto> getAll(Pageable pageable) {
+        return bookService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
