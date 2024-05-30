@@ -1,13 +1,14 @@
-package mik.pet.project.service;
+package mik.pet.project.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import mik.pet.project.exception.EntityNotFoundException;
 import mik.pet.project.model.Book;
-import mik.pet.project.model.dto.BookDto;
-import mik.pet.project.model.dto.NewBookRequestDto;
+import mik.pet.project.model.dto.request.NewBookDto;
+import mik.pet.project.model.dto.response.BookDto;
 import mik.pet.project.repository.BookRepository;
+import mik.pet.project.service.BookService;
 import mik.pet.project.util.mapper.BookMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto createBook(NewBookRequestDto newBookRequestDto) {
-        Book createdBook = bookRepository.save(bookMapper.toModel(newBookRequestDto));
+    public BookDto createBook(NewBookDto newBookDto) {
+        Book createdBook = bookRepository.save(bookMapper.toModel(newBookDto));
         return bookMapper.toDto(createdBook);
     }
 
@@ -41,12 +42,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto updateBook(Long id, NewBookRequestDto newBookRequestDto) {
+    public BookDto updateBook(Long id, NewBookDto newBookDto) {
         if (!bookRepository.existsById(id)) {
             throw new EntityNotFoundException("Failed to update: Could not find Book with id "
                     + id);
         }
-        Book book = bookMapper.toModel(newBookRequestDto);
+        Book book = bookMapper.toModel(newBookDto);
         book.setId(id);
         Book updatedBook = bookRepository.save(book);
         return bookMapper.toDto(updatedBook);

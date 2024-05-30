@@ -1,4 +1,4 @@
-package mik.pet.project.model.dto;
+package mik.pet.project.model.dto.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewBookRequestDto {
+public class NewBookDto {
     @NotNull
     private String title;
     @NotNull

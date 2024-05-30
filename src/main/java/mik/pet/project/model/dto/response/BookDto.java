@@ -1,4 +1,4 @@
-package mik.pet.project.model.dto;
+package mik.pet.project.model.dto.response;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;

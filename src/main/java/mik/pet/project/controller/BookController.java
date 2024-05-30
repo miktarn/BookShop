@@ -3,8 +3,8 @@ package mik.pet.project.controller;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import mik.pet.project.model.dto.BookDto;
-import mik.pet.project.model.dto.NewBookRequestDto;
+import mik.pet.project.model.dto.request.NewBookDto;
+import mik.pet.project.model.dto.response.BookDto;
 import mik.pet.project.service.BookService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,13 +34,13 @@ public class BookController {
     }
 
     @PostMapping
-    public BookDto createBook(@RequestBody @Valid NewBookRequestDto newBookRequestDto) {
-        return bookService.createBook(newBookRequestDto);
+    public BookDto createBook(@RequestBody @Valid NewBookDto newBookDto) {
+        return bookService.createBook(newBookDto);
     }
 
     @PutMapping("/{id}")
     public BookDto updateBook(@PathVariable Long id,
-                              @RequestBody @Valid NewBookRequestDto updateBookDto) {
+                              @RequestBody @Valid NewBookDto updateBookDto) {
         return bookService.updateBook(id, updateBookDto);
     }
 
