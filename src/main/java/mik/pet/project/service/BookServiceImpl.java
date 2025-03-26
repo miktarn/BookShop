@@ -9,6 +9,7 @@ import mik.pet.project.model.dto.BookDto;
 import mik.pet.project.model.dto.NewBookRequestDto;
 import mik.pet.project.repository.BookRepository;
 import mik.pet.project.util.mapper.BookMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +19,8 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -31,15 +32,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto getBookById(Long id) throws EntityNotFoundException {
+    public BookDto getBookById(Long id) {
         Book pulledBook = bookRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Could not find Book with id " + id)
+                () -> new EntityNotFoundException("Failed to get: Could not find Book with id "
+                        + id)
         );
         return bookMapper.toDto(pulledBook);
     }
 
     @Override
     public BookDto updateBook(Long id, NewBookRequestDto newBookRequestDto) {
+        if (!bookRepository.existsById(id)) {
+            throw new EntityNotFoundException("Failed to update: Could not find Book with id "
+                    + id);
+        }
         Book book = bookMapper.toModel(newBookRequestDto);
         book.setId(id);
         Book updatedBook = bookRepository.save(book);
@@ -48,6 +54,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(Long id) {
+        if (!bookRepository.existsById(id)) {
+            throw new EntityNotFoundException("Failed to delete: Could not find Book with id "
+                    + id);
+        }
         bookRepository.deleteById(id);
     }
 }
