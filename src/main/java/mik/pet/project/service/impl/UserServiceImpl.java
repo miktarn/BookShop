@@ -1,5 +1,6 @@
 package mik.pet.project.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import mik.pet.project.dto.request.UserRegistrationDto;
 import mik.pet.project.dto.response.UserResponseDto;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserResponseDto register(UserRegistrationDto newUserDto) throws RegistrationException {
         if (userRepository.existsUserByEmail(newUserDto.getEmail())) {
             throw new RegistrationException("User with email %s already exists"
