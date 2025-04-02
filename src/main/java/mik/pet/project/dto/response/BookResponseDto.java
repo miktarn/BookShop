@@ -1,4 +1,4 @@
-package mik.pet.project.model.dto;
+package mik.pet.project.dto.response;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDto {
+public class BookResponseDto {
     private Long id;
     private String title;
     private String author;
