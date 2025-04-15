@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-users
+      author: miktarn
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: admin@example.com }
+              - column: { name: password, value: "$2a$10$eYoSpwcBaoHimsz6DwKRHeU3WYUpbM5rWcK3rBJwSisIHbGlYLcOK" } #admin
+              - column: { name: first_name, value: Admin }
+              - column: { name: last_name, value: User }
+              - column: { name: shipping_address, value: "123 Admin St" }
+
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: user@example.com }
+              - column: { name: password, value: "$2a$10$zcacwdT04DdTkprL8GoW7OUAitxGC2ySw/AR7vMDDn73flQSP3cC6" } #user
+              - column: { name: first_name, value: Test }
+              - column: { name: last_name, value: User }
+              - column: { name: shipping_address, value: "456 User Rd" }
+
+
+  - changeSet:
+      id: assign-roles-to-users
+      author: miktarn
+      changes:
+        - insert:
+            tableName: user_roles
+            columns:
+              - column: { name: user_id, value: 1 }
+              - column: { name: role_id, value: 1 }
+
+        - insert:
+            tableName: user_roles
+            columns:
+              - column: { name: user_id, value: 2}
+              - column: { name: role_id, value: 2}

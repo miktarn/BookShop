@@ -2,7 +2,7 @@ package mik.pet.project.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import mik.pet.project.dto.request.NewBookRequestDto;
 import mik.pet.project.dto.response.BookResponseDto;
 import mik.pet.project.exception.EntityNotFoundException;
@@ -14,10 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-    private BookRepository bookRepository;
-    private BookMapper bookMapper;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
     @Override
     public List<BookResponseDto> findAll(Pageable pageable) {
