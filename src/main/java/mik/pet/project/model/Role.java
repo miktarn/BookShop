@@ -16,7 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Data
 @Table(name = "roles")
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor  
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +27,9 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return name.name();
+    }
+
+    public enum RoleName {
+        ROLE_USER, ROLE_ADMIN
     }
 }

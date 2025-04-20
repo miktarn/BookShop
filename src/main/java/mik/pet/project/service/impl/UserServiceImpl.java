@@ -7,7 +7,6 @@ import mik.pet.project.dto.request.UserRegistrationDto;
 import mik.pet.project.dto.response.UserResponseDto;
 import mik.pet.project.exception.RegistrationException;
 import mik.pet.project.model.Role;
-import mik.pet.project.model.RoleName;
 import mik.pet.project.model.User;
 import mik.pet.project.repository.RoleRepository;
 import mik.pet.project.repository.UserRepository;
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService {
             throw new RegistrationException("User with email %s already exists"
                     .formatted(newUserDto.getEmail()));
         }
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
                 .orElseThrow(() -> new IllegalStateException("Enable to find RoleUser in DB"));
 
         User mappedUser = userMapper.toModel(newUserDto);
