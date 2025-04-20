@@ -1,6 +1,7 @@
 package mik.pet.project.dto.request;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import mik.pet.project.util.validation.FieldMatch;
@@ -13,16 +14,16 @@ public class UserRegistrationDto {
     @NotNull
     @Email
     private String email;
-    @NotNull
+    @NotBlank
     @Length(min = 8, max = 100)
     private String password;
-    @NotNull
+    @NotBlank
     @Length(min = 8, max = 100)
     private String repeatPassword;
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 40)
     private String firstName;
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 40)
     private String lastName;
     @Length(min = 10, max = 500)
