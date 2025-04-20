@@ -7,6 +7,7 @@ import mik.pet.project.dto.request.NewBookRequestDto;
 import mik.pet.project.dto.response.BookResponseDto;
 import mik.pet.project.service.BookService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,17 +35,20 @@ public class BookController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public BookResponseDto createBook(@RequestBody @Valid NewBookRequestDto newBookRequestDto) {
         return bookService.createBook(newBookRequestDto);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public BookResponseDto updateBook(@PathVariable Long id,
                                       @RequestBody @Valid NewBookRequestDto updateBookDto) {
         return bookService.updateBook(id, updateBookDto);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteById(id);
     }
