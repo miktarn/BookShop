@@ -42,6 +42,11 @@ public class CustomGlobalExceptionHandler {
         return buildResponse(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    public ResponseEntity<Object> handleRegistrationException(RegistrationException ex) {
+        return buildResponse(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex) {
         return buildResponse(List.of(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
